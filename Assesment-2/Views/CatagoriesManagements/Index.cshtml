@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Assesment_2.Models.CatagoriesManagement>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (Context.Session.GetString("Role") == "Admin")
+{
+    <p>
+        <a href="/CatagoriesManagements/create" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i>Create New Catagory</a>
+    </p>
+}
+    <br />
+
+    <p class="font-weight-bold">
+        To See All Items right ("all")  in searchbar
+    </p>
+
+    <form action="/CatagoriesManagements/index">
+
+        <input type="text" name="f" />
+        <input type="submit" name="search" />
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Picture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Picture)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if (Context.Session.GetString("Role") == "Admin")
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+
+                        @if (Context.Session.GetString("Role") == "Admin")
+                        {
+
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

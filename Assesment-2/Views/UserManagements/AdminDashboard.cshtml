@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "AdminDashboard";
+}
+
+<h1>AdminDashboard</h1>
+
+
+
+<a class="btn btn-success" href="/CatagoriesManagement/Index">CATAGORY LIST</a>
+
+<a class="btn btn-success" href="/ItemManagements1/Index">ITEM LIST</a>
+@if (Context.Session.GetString("Role") == "Admin")
+{
+    <a class="btn btn-success" href="/UserManagements/Index">EXITING USER</a>
+}
